@@ -5,7 +5,9 @@
     <artifactId>cattle-dependencies</artifactId>
     <version>0.0.1</version>
 	<packaging>pom</packaging>
+	<name>${project.artifactId}</name>
     <description>Cattle Framework Build Dependencies</description>
+	<url>https://github.com/Summer-Cattle/Cattle-Build</url>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -17,6 +19,16 @@
         <name>Summer Cattle Team</name>
         <url>https://github.com/Summer-Cattle</url>
     </organization>
+	<developers>
+		<developer>
+			<name>juhua</name>
+			<url>https://github.com/Summer-Cattle</url>
+		</developer>
+	</developers>	
+	<scm>
+		<url>https://github.com/Summer-Cattle/Cattle-Build.git</url>
+		<connection>scm:git:https://git@github.com/Summer-Cattle/Cattle-Build.git</connection>
+	</scm>	
 	<properties>
 		<maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
 		<flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
@@ -44,62 +56,120 @@
 						</rules>
 					</configuration>
 				</plugin>
+			    <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <version>${flatten-maven-plugin.version}</version>
+				    <inherited>true</inherited>
+                    <executions>
+                        <execution>
+                            <id>flatten</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>flatten</goal>
+                            </goals>
+					    	<configuration>
+							    <updatePomFile>true</updatePomFile>
+								<flattenMode>bom</flattenMode>
+								<pomElements>
+								    <parent>expand</parent>
+									<pluginManagement>keep</pluginManagement>
+									<properties>keep</properties>																		
+									<distributionManagement>remove</distributionManagement>
+									<repositories>remove</repositories>
+								    <distributionManagement>remove</distributionManagement>
+									<pluginRepositories>remove</pluginRepositories>
+									<profiles>remove</profiles>
+								</pomElements>
+							</configuration>
+                        </execution>
+                        <execution>
+                            <id>flatten-clean</id>
+                            <phase>clean</phase>
+                            <goals>
+                                <goal>clean</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+			    <plugin>
+			        <groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+				    <version>${maven-gpg-plugin.version}</version>
+				    <executions>
+                        <execution>
+                            <id>sign-artifacts</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+			    </plugin>				
 			</plugins>
 		</pluginManagement>
-        <plugins>
-			<plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>flatten-maven-plugin</artifactId>
-                <version>${flatten-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>flatten</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>flatten</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>flatten.clean</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <updatePomFile>true</updatePomFile>
-					<flattenMode>resolveCiFriendliesOnly</flattenMode>
-					<pomElements>
-					    <repositories>flatten</repositories>
-						<pluginRepositories>flatten</pluginRepositories>
-						<distributionManagement>flatten</distributionManagement>
-					</pomElements>
-                </configuration>
-            </plugin>
-			<plugin>
-			    <artifactId>maven-gpg-plugin</artifactId>
-				<version>${maven-gpg-plugin.version}</version>
-				<executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-			</plugin>
-	    </plugins>
 	</build>
-    <distributionManagement>
-        <snapshotRepository>
-	        <id>central-snapshots</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-        </snapshotRepository>
-        <repository>
-	        <id>central-releases</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
+	<profiles>
+        <profile>
+		    <id>cattle</id>
+			<activation>
+			    <activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+                <plugins>
+			        <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
+					</plugin>
+	            </plugins>
+			</build>
+			<repositories>
+			    <repository>
+				    <id>cattle</id>
+					<url>https://maven.bokesoft.com/artifactory/maven-public</url>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+			    <pluginRepository>
+				    <id>cattle</id>
+					<url>https://maven.bokesoft.com/artifactory/maven-public</url>
+				</pluginRepository>
+			</pluginRepositories>
+			<distributionManagement>
+			    <snapshotRepository>
+				    <id>cattle</id>
+					<url>https://maven.bokesoft.com/artifactory/libs-snapshot-local</url>
+				</snapshotRepository>
+				<repository>
+				    <id>cattle</id>
+					<url>https://maven.bokesoft.com/artifactory/libs-release-local</url>
+				</repository>
+			</distributionManagement>
+		</profile>
+		<profile>
+            <id>central</id>
+			<build>
+                <plugins>
+			        <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
+					</plugin>
+                    <plugin>
+					    <groupId>org.apache.maven.plugins</groupId>
+					    <artifactId>maven-gpg-plugin</artifactId>
+					</plugin>
+	            </plugins>
+			</build>
+			<distributionManagement>
+			    <snapshotRepository>
+				    <id>central</id>
+					<url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+				</snapshotRepository>
+				<repository>
+				    <id>central</id>
+					<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+				</repository>
+			</distributionManagement>
+		</profile>
+	</profiles>	
 </project>
