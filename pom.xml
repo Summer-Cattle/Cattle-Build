@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
     <groupId>io.github.summercattle</groupId>
     <artifactId>cattle-build</artifactId>
-    <version>0.0.1.SP2</version>
+    <version>0.0.1.SP3</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
     <description>Cattle Framework parent pom, managing plugins and dependencies for Cattle Framework projects</description>
@@ -21,38 +21,44 @@
     </organization>
 	<developers>
 		<developer>
+		    <id>juhua</id>
 			<name>juhua</name>
-			<url>https://github.com/Summer-Cattle</url>
+			<organization>Summer Cattle Team</organization>
+			<organizationUrl>https://github.com/Summer-Cattle</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
 		</developer>
-	</developers>	
+	</developers>
 	<scm>
-		<url>https://github.com/Summer-Cattle/Cattle-Build.git</url>
-		<connection>scm:git:https://git@github.com/Summer-Cattle/Cattle-Build.git</connection>
-	</scm>	
+	    <connection>scm:git:https://github.com/Summer-Cattle/Cattle-Build.git</connection>
+		<developerConnection>scm:git:git@github.com:Summer-Cattle/Cattle-Build.git</developerConnection>
+		<url>https://github.com/Summer-Cattle/Cattle-Build</url>		
+	</scm>
 	<modules>
 		<module>cattle-dependencies</module>
 		<module>cattle-build-dependencies</module>
 	</modules>
 	<properties>
-	    <cattle-build.version>0.0.1.SP2</cattle-build.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-		<maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
 		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
-		<maven-javadoc-plugin.version>3.3.0</maven-javadoc-plugin.version>
+		<maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
 		<maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
 		<maven-pmd-plugin.version>3.13.0</maven-pmd-plugin.version>
 		<maven-jacoco-plugin.version>0.8.7</maven-jacoco-plugin.version>
 		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-		<maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
+		<maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version>
 		<maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
 		<versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
-		<p3c-pmd.version>2.1.1</p3c-pmd.version>		
+		<p3c-pmd.version>2.1.1</p3c-pmd.version>
 		<flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
-		<spring-boot.version>2.5.3</spring-boot.version>
         <java.encoding>UTF-8</java.encoding>
 		<javadoc.failOnError>false</javadoc.failOnError>
-		<javadoc.failOnWarnings>false</javadoc.failOnWarnings>
+		<javadoc.failOnWarnings>false</javadoc.failOnWarnings>		
+		<maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+	    <cattle-build.version>0.0.1.SP3</cattle-build.version>
+		<spring-boot.version>2.5.4</spring-boot.version>
 	</properties>
 	<dependencyManagement>
 	    <dependencies>
@@ -297,52 +303,11 @@
         </pluginManagement>
 	</build>
 	<profiles>
-        <profile>
-		    <id>cattle</id>
+		<profile>
+            <id>central</id>
 			<activation>
 			    <activeByDefault>true</activeByDefault>
 			</activation>
-			<build>
-			    <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-pmd-plugin</artifactId>
-			        </plugin>
-                    <plugin>
-			            <groupId>org.codehaus.mojo</groupId>
-				        <artifactId>versions-maven-plugin</artifactId>
-			        </plugin>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>flatten-maven-plugin</artifactId>
-                    </plugin>
-				</plugins>
-			</build>
-			<repositories>
-			    <repository>
-				    <id>cattle</id>
-					<url>https://maven.bokesoft.com/artifactory/maven-public</url>
-				</repository>
-			</repositories>
-			<pluginRepositories>
-			    <pluginRepository>
-				    <id>cattle</id>
-					<url>https://maven.bokesoft.com/artifactory/maven-public</url>
-				</pluginRepository>
-			</pluginRepositories>
-			<distributionManagement>
-			    <snapshotRepository>
-				    <id>cattle</id>
-					<url>https://maven.bokesoft.com/artifactory/libs-snapshot-local</url>
-				</snapshotRepository>
-				<repository>
-				    <id>cattle</id>
-					<url>https://maven.bokesoft.com/artifactory/libs-release-local</url>
-				</repository>
-			</distributionManagement>
-		</profile>
-		<profile>
-            <id>central</id>
 			<build>
 			    <plugins>
                     <plugin>

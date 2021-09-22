@@ -4,12 +4,12 @@
     <parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-dependencies</artifactId>
-		<version>2.5.3</version>
+		<version>2.5.4</version>
 		<relativePath/>
 	</parent>
     <groupId>io.github.summercattle</groupId>
     <artifactId>cattle-build-dependencies</artifactId>
-    <version>0.0.1.SP2</version>
+    <version>0.0.1.SP3</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 	<description>Cattle Framework Build Dependencies: an internal BOM for use with Cattle Framework projects.</description>
@@ -26,23 +26,34 @@
     </organization>
 	<developers>
 		<developer>
+		    <id>juhua</id>
 			<name>juhua</name>
-			<url>https://github.com/Summer-Cattle</url>
+			<organization>Summer Cattle Team</organization>
+			<organizationUrl>https://github.com/Summer-Cattle</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
 		</developer>
-	</developers>	
+	</developers>
+	<scm>
+	    <connection>scm:git:https://github.com/Summer-Cattle/Cattle-Build.git</connection>
+		<developerConnection>scm:git:git@github.com:Summer-Cattle/Cattle-Build.git</developerConnection>
+		<url>https://github.com/Summer-Cattle/Cattle-Build</url>		
+	</scm>
 	<properties>
-	    <spring-framework.version>5.3.9</spring-framework.version>
-		<spring-security.version>5.5.1</spring-security.version>
-		<spring-data.version>2021.0.3</spring-data.version>
-		<spring-session.version>2021.0.1</spring-session.version>
-		<slf4j.version>1.7.32</slf4j.version>
-		<snakeyaml.version>1.29</snakeyaml.version>
-		<jackson.version>2.12.4</jackson.version>
-		<log4j.version>2.14.1</log4j.version>
-		<bouncycastle.version>1.69</bouncycastle.version>
-		<groovy.version>3.0.8</groovy.version>
 		<flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
 		<maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+	    <spring-framework.version>5.3.10</spring-framework.version>
+		<spring-security.version>5.5.2</spring-security.version>
+		<spring-data.version>2021.0.5</spring-data.version>
+        <spring-session.version>2021.0.2</spring-session.version>
+		<slf4j.version>1.7.32</slf4j.version>
+		<snakeyaml.version>1.29</snakeyaml.version>
+		<jackson.version>2.12.5</jackson.version>
+		<log4j.version>2.14.1</log4j.version>
+		<bouncycastle.version>1.69</bouncycastle.version>
+		<groovy.version>3.0.9</groovy.version>
+		<logback.version>1.2.6</logback.version>
 	</properties>
 	<dependencyManagement>
 	    <dependencies>
@@ -78,13 +89,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-			<dependency>
-			    <groupId>org.springframework.session</groupId>
-				<artifactId>spring-session-bom</artifactId>
-				<version>${spring-session.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-quartz</artifactId>
@@ -107,6 +111,13 @@
             	    </exclusion>
                 </exclusions>
             </dependency>
+			<dependency>
+			    <groupId>org.springframework.session</groupId>
+				<artifactId>spring-session-bom</artifactId>
+				<version>${spring-session.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -161,6 +172,16 @@
                 <artifactId>groovy</artifactId>
 				<version>${groovy.version}</version>
 				<classifier>indy</classifier>
+			</dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.version}</version>
+			</dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -221,44 +242,11 @@
         </pluginManagement>			
 	</build>
 	<profiles>
-        <profile>
-		    <id>cattle</id>
+		<profile>
+            <id>central</id>
 			<activation>
 			    <activeByDefault>true</activeByDefault>
 			</activation>
-			<build>
-                <plugins>
-			        <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>flatten-maven-plugin</artifactId>
-					</plugin>
-	            </plugins>
-			</build>			
-			<repositories>
-			    <repository>
-				    <id>cattle</id>
-					<url>https://maven.bokesoft.com/artifactory/maven-public</url>
-				</repository>
-			</repositories>
-			<pluginRepositories>
-			    <pluginRepository>
-				    <id>cattle</id>
-					<url>https://maven.bokesoft.com/artifactory/maven-public</url>
-				</pluginRepository>
-			</pluginRepositories>
-			<distributionManagement>
-			    <snapshotRepository>
-				    <id>cattle</id>
-					<url>https://maven.bokesoft.com/artifactory/libs-snapshot-local</url>
-				</snapshotRepository>
-				<repository>
-				    <id>cattle</id>
-					<url>https://maven.bokesoft.com/artifactory/libs-release-local</url>
-				</repository>
-			</distributionManagement>
-		</profile>
-		<profile>
-            <id>central</id>
 			<build>
                 <plugins>
 			        <plugin>

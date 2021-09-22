@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>	
     <groupId>io.github.summercattle</groupId>
     <artifactId>cattle-dependencies</artifactId>
-    <version>0.0.1.SP2</version>
+    <version>0.0.1.SP3</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
     <description>Cattle Framework Build Dependencies</description>
@@ -21,16 +21,22 @@
     </organization>
 	<developers>
 		<developer>
+		    <id>juhua</id>
 			<name>juhua</name>
-			<url>https://github.com/Summer-Cattle</url>
+			<organization>Summer Cattle Team</organization>
+			<organizationUrl>https://github.com/Summer-Cattle</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
 		</developer>
-	</developers>	
+	</developers>
 	<scm>
-		<url>https://github.com/Summer-Cattle/Cattle-Build.git</url>
-		<connection>scm:git:https://git@github.com/Summer-Cattle/Cattle-Build.git</connection>
-	</scm>	
+	    <connection>scm:git:https://github.com/Summer-Cattle/Cattle-Build.git</connection>
+		<developerConnection>scm:git:git@github.com:Summer-Cattle/Cattle-Build.git</developerConnection>
+		<url>https://github.com/Summer-Cattle/Cattle-Build</url>		
+	</scm>
 	<properties>
-		<maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
+		<maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version>
 		<flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
 		<maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
 	</properties>
@@ -110,44 +116,11 @@
 		</pluginManagement>
 	</build>
 	<profiles>
-        <profile>
-		    <id>cattle</id>
-			<activation>
-			    <activeByDefault>true</activeByDefault>
-			</activation>
-			<build>
-                <plugins>
-			        <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>flatten-maven-plugin</artifactId>
-					</plugin>
-	            </plugins>
-			</build>
-			<repositories>
-			    <repository>
-				    <id>cattle</id>
-					<url>https://maven.bokesoft.com/artifactory/maven-public</url>
-				</repository>
-			</repositories>
-			<pluginRepositories>
-			    <pluginRepository>
-				    <id>cattle</id>
-					<url>https://maven.bokesoft.com/artifactory/maven-public</url>
-				</pluginRepository>
-			</pluginRepositories>
-			<distributionManagement>
-			    <snapshotRepository>
-				    <id>cattle</id>
-					<url>https://maven.bokesoft.com/artifactory/libs-snapshot-local</url>
-				</snapshotRepository>
-				<repository>
-				    <id>cattle</id>
-					<url>https://maven.bokesoft.com/artifactory/libs-release-local</url>
-				</repository>
-			</distributionManagement>
-		</profile>
 		<profile>
             <id>central</id>
+			<activation>
+			    <activeByDefault>true</activeByDefault>
+			</activation>			
 			<build>
                 <plugins>
 			        <plugin>
