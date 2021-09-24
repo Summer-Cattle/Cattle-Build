@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>	
-    <groupId>io.github.summercattle</groupId>
+    <groupId>com.gitlab.summer-cattle</groupId>
     <artifactId>cattle-dependencies</artifactId>
-    <version>0.0.1.SP3</version>
+    <version>0.0.1</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
     <description>Cattle Framework Build Dependencies</description>
-	<url>https://github.com/Summer-Cattle/Cattle-Build</url>
+	<url>https://gitlab.com/summer-cattle/cattle-build</url>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -17,23 +17,23 @@
     </licenses>
     <organization>
         <name>Summer Cattle Team</name>
-        <url>https://github.com/Summer-Cattle</url>
+        <url>https://gitlab.com/summer-cattle</url>
     </organization>
 	<developers>
 		<developer>
 		    <id>juhua</id>
 			<name>juhua</name>
 			<organization>Summer Cattle Team</organization>
-			<organizationUrl>https://github.com/Summer-Cattle</organizationUrl>
+			<organizationUrl>https://gitlab.com/summer-cattle</organizationUrl>
             <roles>
                 <role>developer</role>
             </roles>
 		</developer>
 	</developers>
 	<scm>
-	    <connection>scm:git:https://github.com/Summer-Cattle/Cattle-Build.git</connection>
-		<developerConnection>scm:git:git@github.com:Summer-Cattle/Cattle-Build.git</developerConnection>
-		<url>https://github.com/Summer-Cattle/Cattle-Build</url>		
+	    <connection>scm:git:ssh://gitlab.com/summer-cattle/cattle-build.git</connection>
+		<developerConnection>scm:git:ssh://git@gitlab.com:summer-cattle/cattle-build.git</developerConnection>
+		<url>https://gitlab.com/summer-cattle/cattle-build</url>	
 	</scm>
 	<properties>
 		<maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version>
